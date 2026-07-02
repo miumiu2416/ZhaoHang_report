@@ -486,7 +486,7 @@ def add_world_index(index_returns, start_date="20230101"):
         ]
     ]
     world_index_returns.index = pd.to_datetime(world_index_returns.index)
-    world_index_returns.loc[["2020-04-20", "2020-04-21"], "CL1 Comdty"] = np.nan
+    # world_index_returns.loc[["2020-04-20", "2020-04-21"], "CL1 Comdty"] = np.nan
     return pd.merge(index_returns, world_index_returns, left_index=True, right_index=True, how="outer")
 
 
