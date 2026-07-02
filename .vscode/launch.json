@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Build report cache",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/build_report_cache.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Debug monthly_report.py defaults",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/monthly_report.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

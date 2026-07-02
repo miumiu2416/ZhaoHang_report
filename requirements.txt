@@ -1,0 +1,16 @@
+# Core data processing
+numpy
+pandas
+openpyxl
+
+# Word report generation
+python-docx
+
+# Database connectors used by util.py
+cx-Oracle
+pymssql
+pymysql
+clickhouse-driver
+
+# Utilities
+tqdm
