@@ -319,10 +319,11 @@ def quarter_report(position, start_date="2023-01-01"):
         SELECT S_INFO_WINDCODE, ANN_DT, N_INFO_TITLE, N_INFO_FCODE, COLLECT_TIME
         FROM FundAnnInf
         WHERE N_INFO_FCODE IN ('5602030000')
-        AND ANN_DT >= '{start_date.replace("-", "")}'
+        AND ANN_DT >= to_date('{start_date.replace("-", "")}', 'yyyyMMdd')
         """,
         conn,
     )
+    ann["ANN_DT"] = pd.to_datetime(ann["ANN_DT"])
     ann = ann[ann["ANN_DT"] >= start_date].sort_values("ANN_DT")
     ann = ann[(ann["N_INFO_TITLE"].str.contains("季度")) | (ann["N_INFO_TITLE"].str.contains("季报"))]
     for keyword in ["更正", "提示", "补充", "组合情况", "更新"]:
@@ -355,10 +356,11 @@ def detail_report(position, start_date="2023-01-01"):
         SELECT S_INFO_WINDCODE, ANN_DT, N_INFO_TITLE, N_INFO_FCODE, COLLECT_TIME
         FROM FundAnnInf
         WHERE N_INFO_FCODE IN ('5602010000', '5602020000')
-        AND ANN_DT >= '{start_date.replace("-", "")}'
+        AND ANN_DT >= to_date('{start_date.replace("-", "")}', 'yyyyMMdd')
         """,
         conn,
     )
+    ann["ANN_DT"] = pd.to_datetime(ann["ANN_DT"])
     ann = ann[ann["ANN_DT"] >= start_date].sort_values("ANN_DT")
     ann = ann[
         (ann["N_INFO_TITLE"].str.contains("年度"))
