@@ -707,6 +707,7 @@ def read_backup_mapper(result, index_category, fund_basic):
     new_fund_mapper.index = new_fund_mapper.index.str.slice(0, -3)
     new_fund_mapper.drop("159223", inplace=True, errors="ignore")
     new_fund_mapper.loc['159223'] = "被动权益"
+    new_fund_mapper = new_fund_mapper.groupby(new_fund_mapper.index).last()
     return new_fund_mapper
 
 

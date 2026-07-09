@@ -611,6 +611,7 @@ def read_backup_mapper(result, index_category, fund_basic):
         new_fund_mapper.loc[code] = classify_equity_bucket([code], fund_wind2).iloc[0]
     new_fund_mapper.loc['005010'] = "纯债债基"
     new_fund_mapper.loc['378546'] = "其他商品"
+    new_fund_mapper = new_fund_mapper.groupby(new_fund_mapper.index).last()
     return new_fund_mapper
 
 

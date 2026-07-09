@@ -895,6 +895,7 @@ def build_fund_mapper(result, index_category, fund_basic, passive_returns):
     mapper.loc["159519"] = "被动权益"
     mapper.loc["005010"] = "纯债债基"
     mapper.loc["378546"] = "其他商品"
+    mapper = mapper.groupby(mapper.index).last()
     return mapper.rename("资产类型").to_frame()
 
 
