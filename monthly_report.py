@@ -423,7 +423,7 @@ def insert_asset_group_row(table, row_idx, text):
     first_cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
 
 
-def create_fof_report(fund_name, end, start, etf_ratio, df1, df2, df3, df4, df5, df6):
+def create_fof_report(fund_name, end, start, etf_ratio, df1, df2, df3, df4, df5, df6, output_path=None):
     """创建FOF运作报告文档。"""
     ensure_docx_imports()
     doc = Document()
@@ -654,7 +654,10 @@ def create_fof_report(fund_name, end, start, etf_ratio, df1, df2, df3, df4, df5,
 
     insert_table(doc, df6, True)  # 插入附录表格
 
-    doc.save(fund_name + "FOF运作报告模板.docx")  # 保存文档
+    output_path = Path(output_path) if output_path is not None else Path(fund_name + "FOF运作报告模板.docx")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    doc.save(output_path)
+    return output_path
 
 
 def read_fund_mapper(file_path):
@@ -899,7 +902,8 @@ def generate_fof_report(date, fund, result, data_root="."):
     df3.loc["二级债基"] += month_table.loc["偏债混合"]
     df3.drop("偏债混合", inplace=True)
 
-    create_fof_report(
+    output_path = report_dir / f"{fund}FOF运作报告{date[:7]}.docx"
+    saved_path = create_fof_report(
         fund,
         date,
         excels["start"].iloc[0].strftime("%Y/%m/%d"),
@@ -910,7 +914,9 @@ def generate_fof_report(date, fund, result, data_root="."):
         df4,
         week_table,
         after_table,
+        output_path=output_path,
     )
+    print(f"报告已生成：{saved_path.resolve()}")
 
 
 def determine_relevant_excels(excels, date):
