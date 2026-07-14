@@ -24,7 +24,7 @@ from util import (
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_DATA_ROOT = BASE_DIR / "data"
 DEFAULT_CACHE_START_DATE = "20230101"
-DEFAULT_REPORT_DATE = "2026-03-31"
+DEFAULT_REPORT_DATE = "2026-06-30"
 DEFAULT_REPORT_FUND = "华夏盈泰稳健"
 index_return = None
 returns = None
